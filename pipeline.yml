@@ -1,0 +1,37 @@
+---
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
+
+resources:
+- name: ops-manager
+  type: pivnet
+  source:
+    api_token: dx9snexN1CveTioPtrHU
+    product_slug: ops-manager
+    product_version: 2\.5\.8
+
+jobs:
+- name: upload-to-vcenter
+  plan:
+    - get: ops-manager
+      params:
+        globs:
+        - "*vsphere*"
+    - task: upload
+      config:
+        platform: linux
+        inputs:
+          - name: ops-manager
+        image_resource:
+          type: docker-image
+          source:
+            repository: paasmule/govc
+        run:
+          path: bash
+          args: 
+          - -c
+          - govc import.ova -ds iSCSI-1 -options 'adminPassword="admin"' -name snw-ahartpence-lab-ops-man -folder snw-ahartpence-lab -k -u ahartpence-lab:'q2rt8$$42U7PEz6W'@vsphere.lab.starkandwayne.com  ops-manager/ops-manager-vsphere-2.5.8-build.212.ova
