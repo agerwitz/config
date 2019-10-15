@@ -34,7 +34,7 @@ jobs:
         GOVC_PASSWORD: q2rt8$$42U7PEz6W
         GOVC_USERNAME: ahartpence-lab
         GOVC_DATASTORE: iSCSI-1
-        OPSMAN_IP: 10.128.192.205
+        OM_IP: 10.128.192.205
         OM_GATEWAY: 10.128.0.1
         OM_DNS_SERVERS: 10.128.0.1
         OM_VM_FOLDER: snw-ahartpence-lab
