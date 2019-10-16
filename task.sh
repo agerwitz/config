@@ -42,7 +42,7 @@ jq \
 cat options.json
 
 if [ -z "$OM_VM_FOLDER" ]; then
-  govc import.ova -options=options.json "$file_path"
+  govc import.ova -options=options.json pivnet-opsman-product/ops-manager-vsphere-2.5.8-build.212.ova
 else
   if [ "$(govc folder.info "$OM_VM_FOLDER" 2>&1 | grep "$OM_VM_FOLDER" | awk '{print $2}')" != "$OM_VM_FOLDER" ]; then
     govc folder.create "$OM_VM_FOLDER"
