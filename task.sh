@@ -16,7 +16,6 @@ del(.Deployment) |
 .Name = $vmName |
 .DiskProvisioning = $diskType |
 .NetworkMapping[].Network = $network |
-.PowerOn = $powerOn |
 (.PropertyMapping[] | select(.Key == "ip0")).Value = $ip0 |
 (.PropertyMapping[] | select(.Key == "netmask0")).Value = $netmask0 |
 (.PropertyMapping[] | select(.Key == "gateway")).Value = $gateway |
