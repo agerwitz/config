@@ -37,7 +37,6 @@ jq \
   --arg network "$OM_VM_NETWORK" \
   --arg vmName "$OM_VM_NAME" \
   --arg diskType "$OPSMAN_DISK_TYPE" \
-  --argjson powerOn "$OM_VM_POWER_STATE" \
   --from-file filters \
   om-import.json > options.json
 
