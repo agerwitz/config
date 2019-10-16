@@ -35,6 +35,7 @@ params:
 
 inputs:
   - name: config
+  - name: pivnet-opsman-product
 
 run:
   path: config/task.sh

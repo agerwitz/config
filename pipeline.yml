@@ -20,22 +20,28 @@ resources:
     branch: master
 
 jobs:
-- name: upload-to-vcenter
+- name: deploy-opsman
   plan:
+  - aggregate:
     - get: config
     - get: pivnet-opsman-product
-      params:
-        globs:
-        - "*vsphere*"
-    - task: upload
-      file: config/task.yml
-      params:
-        GOVC_URL: vsphere.lab.starkandwayne.com
-        GOVC_PASSWORD: q2rt8$$42U7PEz6W
-        GOVC_USERNAME: ahartpence-lab
-        GOVC_DATASTORE: iSCSI-1
-        OM_IP: 10.128.192.205
-        OM_GATEWAY: 10.128.0.1
-        OM_DNS_SERVERS: 10.128.0.1
-        OM_VM_FOLDER: snw-ahartpence-lab
-        
+      resource: pivnet-opsman-product
+      params: {globs: ["*.ova"]}
+
+  - task: deploy
+    file: config/task.yml
+    params:
+      GOVC_INSECURE: true
+      GOVC_URL: vsphere.lab.starkandwayne.com 
+      GOVC_USERNAME: ahartpence-lab
+      GOVC_PASSWORD: q2rt8$$42U7PEz6W
+      GOVC_DATASTORE: iSCSI-1
+      OM_VM_FOLDER: snw-ahartpence-lab
+      OPS_MGR_SSH_PWD: Cloudc0w
+      OM_DNS_SERVERS: 10.128.0.1
+      OM_GATEWAY:  10.128.0.1
+      OM_NETMASK: 255.255.248.0
+      OM_IP: 10.128.192.205
+      OM_VM_NETWORK: "VM Network"
+      OM_VM_NAME: "snw-ahartpence-lab-ops-man"
+      OPSMAN_DISK_TYPE: "thin"
